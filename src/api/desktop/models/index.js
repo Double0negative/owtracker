@@ -3,8 +3,9 @@
 var fs        = require("fs");
 var path      = require("path");
 var Sequelize = require("sequelize");
+var sqlite3   = require("sqlite3")
 var env       = process.env.NODE_ENV || "development";
-var config    = require(path.join(__dirname, '../../..', 'config', 'config.json'))[env].db;
+var config    = require('../../../config/db.json')[env];
 if (process.env.DATABASE_URL) {
   var sequelize = new Sequelize(process.env.DATABASE_URL,config);
 } else {
