@@ -4,7 +4,7 @@ export async function getGameById(id) {
     return await gameDao.findAll()
 }
 
-export async function createGame(game) {
+export async function createAccount(game) {
     await gameDao.create(game)
 }
 

@@ -1,4 +1,4 @@
-const db = require("../models").default
+import mapDao from "../daos/MapDao"
 
 
 export async function getMapId(id) {
@@ -18,6 +18,10 @@ export async function getMapByKey(key) {
 }
 
 export async function getAllMaps() {
-  console.log(db)
-  return (await db.map.findAll()).map(data => data.dataValues)
+  return _map(await mapDao.findAll())
+}
+
+
+function _map(data) {
+  return data.map(data => data.dataValues)
 }

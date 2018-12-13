@@ -20,6 +20,11 @@
       console.log(client)
       let maps = await client.getAllMaps()
       console.log(maps)
+
+      await client.createGame({
+        mapId: 1,
+
+      })
     }
   }
 </script>

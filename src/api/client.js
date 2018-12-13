@@ -1,1 +1,1 @@
-export * from './desktop/client'
+export {default} from './desktop/client'

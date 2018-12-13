@@ -1,11 +1,17 @@
 const Promise = require('bluebird');
 //const logger  = require('../../logger');
 const { CustomError } = require('../errors/CustomError');
-const db = require('../models');
+const db = require('../models').default;
+
+console.log(db)
+let logger = {
+    debug: console.log
+}
+
 const sequelize = db.sequelize
 const Op = sequelize.Op
 
-class BaseDao {
+export default class BaseDao {
 
     constructor(Model, defaultInclude, defaultLimit = 100, defaultOffset = 0) {
         this.model = Model.inspect();
@@ -59,14 +65,21 @@ class BaseDao {
                 include: include || this.defaultInclude});
     }
 
-    findAll(limit, offset, sort, include) {
-        logger.debug("BaseDao.findAll");
+    findAll() {
+        logger.debug("BaseDao.findAll",this.model,  db.sequelize.model(this.model));
+        return db.sequelize.model(this.model)
+            .findAll();
+    }
+
+    findAllOptions(limit, offset, sort, include) {
+        logger.debug("BaseDao.findAllOptions",this.model,  db.sequelize.model(this.model));
         return db.sequelize.model(this.model)
             .findAll({
                 limit: limit,
                 offset: offset,
                 order: [sort],
-                include: include || this.defaultInclude});
+                include: include || this.defaultInclude
+            });
     }
 
     findById(id, options) {
@@ -198,4 +211,3 @@ class BaseDao {
     }
 }
 
-module.exports = BaseDao;

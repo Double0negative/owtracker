@@ -14,10 +14,10 @@ module.exports = function(sequelize, DataTypes) {
     paranoid: true
   });
 
-
-  map.associate = function(models) {
-   // models.map.belongsTo(models.game);
-  };
+  //
+  // map.associate = function(models) {
+  //  // models.map.belongsTo(models.game);
+  // };
 
   return map;
 };
