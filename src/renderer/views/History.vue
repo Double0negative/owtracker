@@ -1,7 +1,8 @@
 <template>
     <div class="map">
+      <router-link to="/">Home</router-link>
         <h4>Map History</h4>
-       <game :game="games[0]"></game>
+       
     </div>
 </template>
 

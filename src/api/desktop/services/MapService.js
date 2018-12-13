@@ -22,6 +22,4 @@ export async function getAllMaps() {
 }
 
 
-function _map(data) {
-  return data.map(data => data.dataValues)
-}
+

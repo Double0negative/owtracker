@@ -3,7 +3,6 @@ const Promise = require('bluebird');
 const { CustomError } = require('../errors/CustomError');
 const db = require('../models').default;
 
-console.log(db)
 let logger = {
     debug: console.log
 }
@@ -153,9 +152,9 @@ export default class BaseDao {
             })
     }
 
-    create(input, options) {
+    async create(input, options) {
         logger.debug('BaseDao.create(input)');
-        return db.sequelize.model(this.model)
+        return await db.sequelize.model(this.model)
             .create(input, options);
     }
 
@@ -208,6 +207,13 @@ export default class BaseDao {
                     returning: true,
                     plain: true
                 })
+    }
+
+    delete(where) {
+        return db.sequelize.model(this.model)
+            .destroy({
+                where
+            })
     }
 }
 
