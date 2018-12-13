@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
 
 
   map.associate = function(models) {
-    models.map.belongsTo(models.game);
+   // models.map.belongsTo(models.game);
   };
 
   return map;

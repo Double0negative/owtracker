@@ -1,10 +1,10 @@
 const _ = require("lodash")
-const MapService = require("./services/MapService")
 
 let client = {}
 
-_.assign(client, MapService)
+_.assign(client, require("./services/MapService"))
+_.assign(client, require("./services/GameService"))
 
-module.exports = client
+export default client
 
 

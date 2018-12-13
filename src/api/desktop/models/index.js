@@ -6,6 +6,7 @@ var Sequelize = require("sequelize");
 var sqlite3   = require("sqlite3")
 var env       = process.env.NODE_ENV || "development";
 var config    = require('../../../config/db.json')[env];
+const t = require("./Account.js")
 if (process.env.DATABASE_URL) {
   var sequelize = new Sequelize(process.env.DATABASE_URL,config);
 } else {
@@ -19,7 +20,7 @@ fs
     return (file.indexOf(".") !== 0) && (file !== "index.js");
   })
   .forEach(function(file) {
-    var model = sequelize.import(path.join(__dirname, file));
+    var model = sequelize.import(file, require("./" + file));
     db[model.name] = model;
   });
 
@@ -32,4 +33,4 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-module.exports = db;
+export default {...db};

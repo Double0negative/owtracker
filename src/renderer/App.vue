@@ -8,13 +8,18 @@
 </template>
 
 <script>
-  import client from "../api/desktop/client"
+  import client from "../api/client"
   export default {
     name: 'owmap-tracker',
-    data: {
-      return: {
-        client: client
+    data() {
+      return {
+        client
       }
+    },
+    async created() {
+      console.log(client)
+      let maps = await client.getAllMaps()
+      console.log(maps)
     }
   }
 </script>

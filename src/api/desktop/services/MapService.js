@@ -1,22 +1,23 @@
-const db = require("../models")
+const db = require("../models").default
 
 
-module.exports.getMapId = async (id) => {
-  return await db.Map.findOne({
+export async function getMapId(id) {
+  return await db.map.findOne({
     where: {
       id
     }
   })
 }
 
-module.exports.getMapByKey = async (key) => {
-  return await db.Map.findOne({
+export async function getMapByKey(key) {
+  return await db.map.findOne({
     where: {
       key
     }
   })
 }
 
-module.exports.getMaps = async () => {
-  return await db.Map.findAll()
+export async function getAllMaps() {
+  console.log(db)
+  return (await db.map.findAll()).map(data => data.dataValues)
 }

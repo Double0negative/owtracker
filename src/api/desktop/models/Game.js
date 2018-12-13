@@ -16,7 +16,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   game.associate = function(models) {
-    models.game.hasOne(models.map);
+    models.game.belongsTo(models.map);
     models.game.hasOne(models.account);
     models.game.hasMany(models.gamePlayer)
   };
