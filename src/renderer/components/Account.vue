@@ -42,7 +42,7 @@
         },
         gotoAccount(account) {
             if(!this.edit)
-                this.$router.push({ name: 'history', params: { account: account.id }})
+                this.$router.push({ name: 'history', params: { accountId: account.id }})
         }
     }
   }

@@ -11,12 +11,13 @@ export default new Router({
       component: require('@/views/Home').default
     },
     {
-      path: "/account/:account",
+      path: "/account/:accountId",
       name: "account",
+      props: true,
       component: require("@/views/Wrapper").default,
       children:[
         {
-          path: '/history',
+          path: 'history',
           name: 'history',
           component: require('@/views/History').default
         }

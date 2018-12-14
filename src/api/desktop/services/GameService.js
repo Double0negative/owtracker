@@ -1,14 +1,24 @@
 import gameDao from "../daos/GameDao"
-
-export async function getGameById(id) {
-    return await gameDao.findAll()
-}
+import {mapDataValues} from "../utils";
 
 export async function createGame(game) {
-    await gameDao.create(game)
+    console.log("Creating game", game)
+    return (await gameDao.create(game)).dataValues
 }
 
-export async function getGames(start = 1, limit = 100 ) {
-    console.log(db)
-    return (await db.map.findAll()).map(data => data.dataValues)
+export async function updateGame(game) {
+    await gameDao.update(game,  {id: game.id});
+    return await getgame(game.id)
+}
+
+export async function getGame(id) {
+    return (await gameDao.findOne({id})).dataValues
+}
+
+export async function getGames() {
+    return mapDataValues(gameDao.findAll())
+}
+
+export async function deleteGame(game) {
+    return await gameDao.delete({id: game.id})
 }

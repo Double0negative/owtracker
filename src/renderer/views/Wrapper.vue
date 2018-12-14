@@ -2,7 +2,7 @@
   <div id="app" class="wrapper">
     <div class="side">side</div>
     <div class="main">
-      <router-view :client="client"></router-view>
+      <router-view :account-id="accountId" :client="client"></router-view>
     </div>
   </div>
 </template>
@@ -10,9 +10,9 @@
 <script>
   export default {
     name: 'owmap-tracker',
-    props: ['client'],
+    props: ['client', 'accountId'],
     async created() {
-      
+      console.log(this.accountId)
     }
   }
 </script>

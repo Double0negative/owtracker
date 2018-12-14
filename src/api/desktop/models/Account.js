@@ -10,7 +10,8 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: 'deleted_at',
     tableName: 'account',
     version: true,
-    paranoid: true
+    paranoid: true,
+    underscored: true
   });
 
 

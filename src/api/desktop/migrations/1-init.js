@@ -16,9 +16,9 @@ module.exports = {
       queryInterface.createTable("game", {
         id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
         accountId:  { type: DataTypes.INTEGER, field: 'account_id', allowNull: false ,references:{model: "account", key: "id"}},
-        mapId: { type: DataTypes.INTEGER, field: 'map_id', allowNull: false, references:{model: "map", key: "id"} },
-        result: {type: DataTypes.STRING, field: "result", allowNull: false},
-        length: {type: DataTypes.STRING, field: "length", allowNull: false},
+        mapId: { type: DataTypes.INTEGER, field: 'map_id', allowNull: true, references:{model: "map", key: "id"} },
+        result: {type: DataTypes.STRING, field: "result", allowNull: true},
+        length: {type: DataTypes.STRING, field: "length", allowNull: true},
         type: { type: DataTypes.STRING, field: 'type', allowNull: true },
         created_at: {type: Sequelize.DATE, allowNull: true},
         updated_at: {type: Sequelize.DATE, allowNull: true},

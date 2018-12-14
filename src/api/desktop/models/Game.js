@@ -2,9 +2,9 @@ module.exports = function(sequelize, DataTypes) {
   let game = sequelize.define('game', {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     accountId:  { type: DataTypes.INTEGER, field: 'account_id', allowNull: false ,references:{model: "account", key: "id"}},
-    mapId: { type: DataTypes.INTEGER, field: 'map_id', allowNull: false, references:{model: "map", key: "id"} },
-    result: {type: DataTypes.STRING, field: "result", allowNull: false},
-    length: {type: DataTypes.STRING, field: "length", allowNull: false},
+    mapId: { type: DataTypes.INTEGER, field: 'map_id', allowNull: true, references:{model: "map", key: "id"} },
+    result: {type: DataTypes.STRING, field: "result", allowNull: true},
+    length: {type: DataTypes.STRING, field: "length", allowNull: true},
     type: { type: DataTypes.STRING, field: 'type', allowNull: true },
   }, {
     createdAt: 'created_at',
@@ -12,7 +12,9 @@ module.exports = function(sequelize, DataTypes) {
     deletedAt: 'deleted_at',
     tableName: 'game',
     version: true,
-    paranoid: true
+    paranoid: true,
+    underscored: true
+
   });
 
   game.associate = function(models) {

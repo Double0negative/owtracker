@@ -1,14 +1,10 @@
 import client from "../../../api/client"
 
-const state = {}
+const state = []
 
 let findGameIndex = (games, id) => games.findIndex(game => game.id == id)
 
 const mutations = {
-  SET_GAMES (state, payload ) {
-    state = payload.games
-    state.sort((a,b)=> a.id - b.id)
-  },
   ADD_GAME(state, payload) {
     state.push(payload.game)
     state.sort((a,b)=> a.id - b.id)
@@ -20,6 +16,9 @@ const mutations = {
   DELETE_GAME (state, payload) {
     let index = findGameIndex(state, payload.id)
     state.splice(index, 1);
+  },
+  CLEAR_GAMES(state) {
+    state.splice(0, state.length)
   }
 }
 
@@ -28,8 +27,18 @@ const getters = {
 }
 
 const actions = {
-  loadGames ({ commit }) {
+  async loadGames({commit}) {
+    let games = await client.getGames()
+    console.log("Loading games", {games})
+    commit("CLEAR_GAMES")
+    if(games) {
+      games.forEach(game => commit("ADD_GAME", {game}))
+    }
     
+  },
+  async createGame ({ commit }, payload) {
+    let game = await client.createGame(payload);
+    commit("ADD_GAME", {game})
   }
 }
 

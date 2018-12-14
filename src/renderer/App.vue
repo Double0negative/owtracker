@@ -16,11 +16,10 @@
       }
     },
     async created() {
-      
     }
   }
 </script>
 
 <style lang="scss">
-  
+
 </style>
