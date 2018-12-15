@@ -15,8 +15,8 @@ export async function getGame(id) {
     return (await gameDao.findOne({id})).dataValues
 }
 
-export async function getGames() {
-    return mapDataValues(gameDao.findAll())
+export async function getGames(accountId, limit) {
+    return mapDataValues(await gameDao.findAllWithWhere({accountId}))
 }
 
 export async function deleteGame(game) {

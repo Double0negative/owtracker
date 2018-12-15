@@ -1,10 +1,10 @@
 import db from '../models';
 import BaseDao from "./BaseDao"
 
-export class GameDao extends BaseDao {
+export class GamePlayerDao extends BaseDao {
     constructor(Model, defaultIncludes) {
         super(Model, defaultIncludes)
     }
 }
 
-export default new GameDao(db.game, [{model: db.map}, {model: db.gamePlayer}]);
+export default new GamePlayerDao(db.gamePlayer, [{model: db.account}]);

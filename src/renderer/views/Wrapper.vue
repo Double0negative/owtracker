@@ -8,11 +8,26 @@
 </template>
 
 <script>
+    import {mapState, mapActions} from "vuex"
+
   export default {
     name: 'owmap-tracker',
     props: ['client', 'accountId'],
-    async created() {
-      console.log(this.accountId)
+    methods: {
+      ...mapActions([
+          "loadGames",
+          "clearGames"
+      ])
+    },
+    data() {
+      return {
+
+
+      }
+    },
+    async mounted() {
+      this.clearGames()
+      await this.loadGames({accountId: this.accountId})
     }
   }
 </script>

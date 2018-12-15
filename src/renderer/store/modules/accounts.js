@@ -7,7 +7,6 @@ let findAccountIndexByName = (accounts, name) => accounts.findIndex(account => a
 
 const mutations = {
   ADD_ACCOUNT (state, payload) {
-    let index = findAccountIndex(state, payload.account.id)
     state.push(payload.account)
     state.sort((a,b)=> a.id - b.id)
   },
@@ -26,31 +25,29 @@ const mutations = {
 
 const getters = {
     getAccountById: (state) => (id) => accounts[findAccountIndex(state, id)],
-    getAccountByName: (state) => (name) => accounts[findAccountIndexByName(state, name)]
+    getAccountByName: (state) => (name) => accounts[findAccountIndexByName(state, name)],
+    getAccounts: (state) => state.accounts
 }
 
 const actions = {
-   async loadAccounts ({ commit, state }) {
+   async loadUserAccounts ({ commit, state }) {
        commit("CLEAR_ACCOUNTS")
-        let accounts = await client.getAccounts();
+        let accounts = await client.getUserAccounts();
         if(accounts) {
             accounts.forEach(account => {
                 commit( "ADD_ACCOUNT", {account})
             })
         }
     },
-    async createAccount({ commit }) {
-        console.log("Creating account")
-        let account = await client.createAccount({name: "name", battleTag: ""})
-        console.log("Created account", account)
+    async createUserAccount({ commit }) {
+        let account = await client.createAccount({user: true, name: "name", battleTag: ""})
         commit("ADD_ACCOUNT", {account})
     },
-    async updateAccount({ commit }, payload) {
+    async updateUserAccount({ commit }, payload) {
         let account = await client.updateAccount(payload);
-        console.log("acccount", account)
         commit("UPDATE_ACCOUNT", {account})
     },
-    async deleteAccount({commit}, payload) {
+    async deleteUserAccount({commit}, payload) {
         await client.deleteAccount(payload)
         commit("DELETE_ACCOUNT", {account: payload})
     }

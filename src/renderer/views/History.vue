@@ -10,7 +10,7 @@
 <script>
     import Game from "@/components/Game"
     import {mapState, mapActions} from "vuex"
-
+    import client from "../../api/client"
   export default {
     name: 'Map',
     props: [
@@ -26,11 +26,13 @@
     },
     methods: {
       ...mapActions([
-          "createGame",
-          "loadGames"
+          "createGame"
       ]),
-      create() {
-          this.createGame({accountId: this.accountId})
+      async create() {
+        let player = await client.findOrCreateAccount("UserName");
+        player.teammate = false;
+        let game = await this.createGame({accountId: this.accountId, gamePlayers: [player]})
+
       }
     },
     data() {
@@ -39,8 +41,8 @@
 
       }
     },
-    created() {
-      this.loadGames()
+    created() { 
+      
     }
 
 

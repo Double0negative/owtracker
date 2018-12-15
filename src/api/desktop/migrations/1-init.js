@@ -6,7 +6,8 @@ module.exports = {
       queryInterface.createTable("account", {
         id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
         name:  { type: DataTypes.STRING, field: 'name', allowNull: false},
-        battleTag:  { type: DataTypes.STRING, field: 'battle_tag', allowNull: false},
+        battleTag:  { type: DataTypes.STRING, field: 'battle_tag', allowNull: true},
+        user: {type: DataTypes.BOOLEAN, field: "user", defaultValue: false, allowNull: false},
         created_at: {type: Sequelize.DATE, allowNull: true},
         updated_at: {type: Sequelize.DATE, allowNull: true},
         deleted_at: {type: Sequelize.DATE, allowNull: true},
@@ -28,8 +29,10 @@ module.exports = {
 
       queryInterface.createTable("game_player", {
         id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-        playerId: { type: DataTypes.INTEGER, field: 'player_id', allowNull: true, references:{model: "player", key: "id"} },
+        accountId: { type: DataTypes.INTEGER, field: 'account_id', allowNull: true, references:{model: "player", key: "id"} },
         gameId: { type: DataTypes.INTEGER, field: 'game_id', allowNull: true , references:{model: "game", key: "id"}},
+        teammate: {type: DataTypes.BOOLEAN, field: "teammate", allowNull: false, defaultValue: false},
+        slot:  { type: DataTypes.INTEGER, field: 'game_id', allowNull: true},
         created_at: {type: Sequelize.DATE, allowNull: true},
         updated_at: {type: Sequelize.DATE, allowNull: true},
         deleted_at: {type: Sequelize.DATE, allowNull: true},
@@ -48,15 +51,6 @@ module.exports = {
         version: {type: DataTypes.BIGINT, allowNull: false, defaultValue: 0}
       })
 
-      queryInterface.createTable("player", {
-        id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
-        name:  { type: DataTypes.STRING, field: 'name', allowNull: false},
-        battleTag:  { type: DataTypes.STRING, field: 'battle_tag', allowNull: false},
-        created_at: {type: Sequelize.DATE, allowNull: true},
-        updated_at: {type: Sequelize.DATE, allowNull: true},
-        deleted_at: {type: Sequelize.DATE, allowNull: true},
-        version: {type: DataTypes.BIGINT, allowNull: false, defaultValue: 0}
-      })
     }catch(err){
       console.error(err);
     }

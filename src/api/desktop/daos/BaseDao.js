@@ -60,7 +60,7 @@ export default class BaseDao {
                 where: where,
                 limit: limit,
                 offset: offset,
-                order: [sort],
+                order: sort ? [sort] : undefined,
                 include: include || this.defaultInclude});
     }
 

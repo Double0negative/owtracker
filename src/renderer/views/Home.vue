@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-      <button @click="createAccount">Add Account</button>
+      <button @click="createUserAccount">Add Account</button>
       <account v-for="account in accounts" :key="account.id" :account="account"></account>
     </div>
 </template>
@@ -20,12 +20,12 @@
     },
     methods: {
      ...mapActions([
-       "createAccount",
-       "loadAccounts"
+       "createUserAccount",
+       "loadUserAccounts"
      ])
     },
     created() {
-      this.loadAccounts()
+      this.loadUserAccounts()
     } 
   }
 </script>
