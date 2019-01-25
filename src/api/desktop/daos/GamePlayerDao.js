@@ -7,4 +7,4 @@ export class GamePlayerDao extends BaseDao {
     }
 }
 
-export default new GamePlayerDao(db.gamePlayer, [{model: db.account}]);
+export default new GamePlayerDao(db.gamePlayer);

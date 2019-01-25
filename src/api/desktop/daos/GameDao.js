@@ -7,4 +7,4 @@ export class GameDao extends BaseDao {
     }
 }
 
-export default new GameDao(db.game, [{model: db.map}, {model: db.gamePlayer}]);
+export default new GameDao(db.game, [{ model: db.map }, { model: db.gamePlayer }, { model: db.account }]);
